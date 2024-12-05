@@ -149,7 +149,7 @@ const Quiz = () => {
         </header>
         {!isQuizStarted && !isQuizEnded ? (
           <section className="text-center">
-            <p className="py-3 px-5">Click "Start Quiz" to begin</p>
+            <p className="py-3 px-5">Click &#34;Start Quiz&#34; to begin</p>
             <button
               onClick={startQuiz}
               className="bg-blue-500 text-white py-2 px-4 rounded-2xl"
