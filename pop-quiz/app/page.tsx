@@ -11,6 +11,11 @@ interface Question {
   answer: string;
 }
 
+interface SavedScore {
+  user: string;
+  finalScore: number;
+}
+
 const Quiz = () => {
   const [timerCounter, setTimerCounter] = useState(60);
   const [score, setScore] = useState(0);
@@ -18,6 +23,13 @@ const Quiz = () => {
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [isQuizEnded, setIsQuizEnded] = useState(false);
   const [userName, setUserName] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [showScores, setShowScores] = useState(false);
+  const [savedScores, setSavedScores] = useState<SavedScore[]>([]); // To hold saved scores
+  const [isAnswerSelected, setIsAnswerSelected] = useState(false); // Track if an answer is selected
+
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
+
   const [quizQuestions] = useState<Question[]>([
     {
       question: "What does HTML stand for?",
@@ -60,12 +72,6 @@ const Quiz = () => {
       answer: "Bogota",
     },
   ]);
-  const [feedbackMessage, setFeedbackMessage] = useState("");
-  const [showScores, setShowScores] = useState(false);
-  const [savedScores, setSavedScores] = useState<any[]>([]); // To hold saved scores
-  const [isAnswerSelected, setIsAnswerSelected] = useState(false); // Track if an answer is selected
-
-  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   // Start the quiz and initialize the timer
   const startQuiz = () => {
